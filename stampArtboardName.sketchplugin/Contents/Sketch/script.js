@@ -1,16 +1,12 @@
-var ctx, doc, selection, page, view, artboard, artboards;
+var ctx, doc, selection, page, artboard, artboards;
 
 function stampArtboardName(context) {
-
   ctx = context;
   doc = context.document;
   selection = context.selection;
-  page = [doc currentPage];
-  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
-  var artboards = jsArray([doc artboards]);
-  	for(var i = 0; i < artboards.length; i++) {
+  for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
 
         //label underneath
@@ -49,20 +45,9 @@ function stampArtboardName(context) {
   	}
 }
 
-//get javascript array from NSArray
-function jsArray(array) {
-  var length = [array count];
-  var jsArray = [];
-
-  while(length--) {
-  	jsArray.push([array objectAtIndex: length]);
-  }
-  return jsArray;
-}
-
 //find artboard with name
 function getArtboardWithName(name) {
-  var artboards = jsArray([doc artboards]);
+  var artboards = [doc artboards];
   for(var i = 0; i < artboards.length; i++) {
       var artboard = artboards[i];
       //if page matches name
@@ -89,10 +74,8 @@ function hideArtboardNames(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
-  var artboards = jsArray([doc artboards]);
   	for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
 
@@ -111,10 +94,8 @@ function showArtboardNames(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
-  var artboards = jsArray([doc artboards]);
   	for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
 
@@ -133,15 +114,13 @@ function updateArtboardNames(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
-  var artboards = jsArray([doc artboards]);
-  	for(var i = 0; i < artboards.length; i++) {
+  for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
         var label = getLayerWithName("Artboard_name", artboard.name());
           label.setStringValue(artboard.name());
-  	}
+  }
 }
 
 function deleteArtboardNames(context) {
@@ -149,17 +128,15 @@ function deleteArtboardNames(context) {
   doc = context.document;
   selection = context.selection;
   page = [doc currentPage];
-  view = [doc currentView];
   artboards = [[doc currentPage] artboards];
 
-  var artboards = jsArray([doc artboards]);
   	for(var i = 0; i < artboards.length; i++) {
   	  	var artboard = artboards[i];
 
         var all_layers = artboard.layers();
           for (x = 0; x < [all_layers count]; x++) {
             if (all_layers.objectAtIndex(x).name() == "Artboard_name" || all_layers.objectAtIndex(x).name() == "Artboard_name_label") {
-              all_layers.removeObjectAtIndex(x)  
+              all_layers.removeObjectAtIndex(x)
               all_layers.objectAtIndex(x).removeFromParent()
           }
         }
