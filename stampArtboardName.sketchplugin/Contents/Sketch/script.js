@@ -22,7 +22,8 @@ function stampArtboardName(context) {
         path.lineToPoint(NSMakePoint(x, y + h));
         path.lineToPoint(NSMakePoint(x, y));
         path.closePath();
-        var shape = MSShapeGroup.shapeWithBezierPath(path);
+        var newBezier = MSPath.pathWithBezierPath(path);
+        var shape = MSShapeGroup.shapeWithBezierPath(newBezier);
         shape.setName("Artboard_name_label");
         var fill = shape.style().addStylePartOfType(0);
         fill.color = MSImmutableColor.colorWithSVGString("#ffff00");
